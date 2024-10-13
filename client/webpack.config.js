@@ -11,18 +11,64 @@ module.exports = () => {
     mode: 'development',
     entry: {
       main: './src/js/index.js',
-      install: './src/js/install.js'
+      install: './src/js/install.js',
+
     },
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
+      new HtmlWebpackPlugin({
+        favicon: './favicon.ico',
+        template: './index.html',
+        title: 'Just Another Text Editor'
+      }),
+
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js'
+      }),
+
+      new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
+        name: 'Just Another Text Editor',
+        short_name: 'J.A.T.E',
+        description: 'Browser based text editor application',
+        start_url: './',
+        publicPath: './',
+        theme_color: '#848884',
+        background_color: '#848884',
+        icons: [
+          {
+            src: path.resolve('src/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assets', 'icons'),
+          }
+        ],
+      }),
       
     ],
 
     module: {
       rules: [
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          // We use babel-loader in order to use ES6.
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
+            },
+          },
+        },
         
       ],
     },
