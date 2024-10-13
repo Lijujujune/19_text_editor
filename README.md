@@ -4,7 +4,11 @@
 
 J.A.T.E is a progressive web application (PWA) that functions as a simple, offline-capable text editor. It allows users to write and save JavaScript code snippets using CodeMirror, a versatile text editor for the web. This application can be installed on a desktop as a PWA and has persistent data storage using IndexedDB.
 
+Web page:
 <img width="1552" alt="image" src="https://github.com/user-attachments/assets/4ab2628b-4ec8-436b-b459-e1e61adc31bd">
+
+Installed App:
+<img width="1312" alt="image" src="https://github.com/user-attachments/assets/ee4098c1-b248-4364-8586-840be03013ed">
 
 
 ## Links
